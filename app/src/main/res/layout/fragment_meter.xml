@@ -4,126 +4,255 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
+    android:background="#0A0A0A"
     tools:context=".MeterFragment">
 
-
+    <!-- Main Meter Display Panel -->
     <LinearLayout
         android:id="@+id/mainDigitalDisplayLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
+        android:background="#1A1A1A"
+        android:padding="4dp"
+        android:layout_margin="8dp"
+        android:elevation="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <!-- Total Fare Display - Main LCD Screen -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center_horizontal"
-            android:background="#111111"
-            android:padding="8dp"
-            android:layout_marginBottom="8dp">
+            android:gravity="center"
+            android:background="#000000"
+            android:padding="16dp"
+            android:layout_margin="4dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TOTAL"
-                android:textColor="#FFC107"
-                android:textSize="18sp"
-                android:fontFamily="sans-serif-medium" />
-            <TextView
-                android:id="@+id/textViewTotalFare"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0.00"
+                android:text="┌─────────────────────┐"
                 android:textColor="#00FF00"
-                android:textSize="90sp"
-                android:fontFamily="@font/ds_digib"
-                android:letterSpacing="0.05"
-                tools:text="15.75" />
+                android:textSize="10sp"
+                android:fontFamily="monospace"
+                android:alpha="0.3"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="│ "
+                    android:textColor="#00FF00"
+                    android:textSize="16sp"
+                    android:fontFamily="monospace"
+                    android:alpha="0.3"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="▼ TOTAL FARE ▼"
+                        android:textColor="#FF6B00"
+                        android:textSize="14sp"
+                        android:fontFamily="sans-serif-condensed"
+                        android:letterSpacing="0.15"
+                        android:paddingBottom="4dp"/>
+
+                    <TextView
+                        android:id="@+id/textViewTotalFare"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0.00"
+                        android:textColor="#00FF00"
+                        android:textSize="72sp"
+                        android:fontFamily="@font/ds_digib"
+                        android:letterSpacing="0.08"
+                        android:shadowColor="#00FF00"
+                        android:shadowDx="0"
+                        android:shadowDy="0"
+                        android:shadowRadius="8"
+                        tools:text="15.75" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="DIRHAM"
+                        android:textColor="#FF6B00"
+                        android:textSize="12sp"
+                        android:fontFamily="sans-serif-condensed"
+                        android:letterSpacing="0.2"
+                        android:paddingTop="4dp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" │"
+                    android:textColor="#00FF00"
+                    android:textSize="16sp"
+                    android:fontFamily="monospace"
+                    android:alpha="0.3"/>
+            </LinearLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-medium"
-                android:text="DH"
-                android:textColor="#FFC107"
-                android:textSize="18sp" />
+                android:text="└─────────────────────┘"
+                android:textColor="#00FF00"
+                android:textSize="10sp"
+                android:fontFamily="monospace"
+                android:alpha="0.3"/>
         </LinearLayout>
 
+        <!-- Secondary Display Panel -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_margin="4dp">
 
+            <!-- Distance Display -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:gravity="center_horizontal"
-                android:background="#111111"
-                android:padding="4dp"
-                android:layout_marginEnd="4dp">
+                android:gravity="center"
+                android:background="#000000"
+                android:padding="12dp"
+                android:layout_marginEnd="2dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="DISTANCE (KM)"
-                    android:textColor="#AAAAAA"
+                    android:text="═══════════"
+                    android:textColor="#00FFFF"
+                    android:textSize="8sp"
+                    android:fontFamily="monospace"
+                    android:alpha="0.3"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DISTANCE"
+                    android:textColor="#FFD700"
                     android:textSize="10sp"
-                    android:fontFamily="sans-serif-medium" />
+                    android:fontFamily="sans-serif-condensed"
+                    android:letterSpacing="0.1"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="4dp"/>
+
                 <TextView
                     android:id="@+id/textViewDistance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0.0"
                     android:textColor="#00FFFF"
-                    android:textSize="32sp"
+                    android:textSize="36sp"
                     android:fontFamily="@font/ds_digib"
+                    android:shadowColor="#00FFFF"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="4"
                     tools:text="3.8" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="KM"
+                    android:textColor="#FFD700"
+                    android:textSize="10sp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:letterSpacing="0.15"
+                    android:paddingTop="2dp"/>
             </LinearLayout>
 
+            <!-- Time Display -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:gravity="center_horizontal"
-                android:background="#111111"
-                android:padding="4dp"
-                android:layout_marginStart="4dp">
+                android:gravity="center"
+                android:background="#000000"
+                android:padding="12dp"
+                android:layout_marginStart="2dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TEMPS (HR:MIN)"
-                    android:textColor="#AAAAAA"
+                    android:text="═══════════"
+                    android:textColor="#FFA500"
+                    android:textSize="8sp"
+                    android:fontFamily="monospace"
+                    android:alpha="0.3"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TEMPS"
+                    android:textColor="#FFD700"
                     android:textSize="10sp"
-                    android:fontFamily="sans-serif-medium" />
+                    android:fontFamily="sans-serif-condensed"
+                    android:letterSpacing="0.1"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="4dp"/>
+
                 <TextView
                     android:id="@+id/textViewTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="00:00"
-                    android:textColor="#FFC107"
-                    android:textSize="32sp"
+                    android:textColor="#FFA500"
+                    android:textSize="36sp"
                     android:fontFamily="@font/ds_digib"
+                    android:shadowColor="#FFA500"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="4"
                     tools:text="05:30" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="HR:MIN"
+                    android:textColor="#FFD700"
+                    android:textSize="10sp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:letterSpacing="0.15"
+                    android:paddingTop="2dp"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
+    <!-- Temperature Display -->
     <LinearLayout
         android:id="@+id/TempLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:gravity="center"
-        android:layout_marginTop="16dp"
+        android:background="#1A1A1A"
+        android:padding="4dp"
+        android:layout_marginTop="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:elevation="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mainDigitalDisplayLayout">
@@ -131,36 +260,78 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            android:background="#111111"
-            android:padding="8dp">
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="#000000"
+            android:padding="8dp"
+            android:layout_margin="4dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TEMP (°C)"
-                android:textColor="#AAAAAA"
+                android:text="◀ "
+                android:textColor="#87CEEB"
                 android:textSize="12sp"
-                android:fontFamily="sans-serif-medium" />
-            <TextView
-                android:id="@+id/textViewTemperature"
+                android:alpha="0.5"/>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="--°"
-                android:textColor="#ADD8E6"
-                android:textSize="36sp"
-                android:fontFamily="@font/ds_digib"
-                tools:text="22°" />
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TEMP: "
+                    android:textColor="#FFD700"
+                    android:textSize="12sp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:letterSpacing="0.1"/>
+
+                <TextView
+                    android:id="@+id/textViewTemperature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="--°"
+                    android:textColor="#87CEEB"
+                    android:textSize="28sp"
+                    android:fontFamily="@font/ds_digib"
+                    android:shadowColor="#87CEEB"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="3"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="4dp"
+                    tools:text="22°" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="C"
+                    android:textColor="#FFD700"
+                    android:textSize="12sp"
+                    android:fontFamily="sans-serif-condensed"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" ▶"
+                android:textColor="#87CEEB"
+                android:textSize="12sp"
+                android:alpha="0.5"/>
         </LinearLayout>
     </LinearLayout>
 
+    <!-- Control Buttons -->
     <LinearLayout
         android:id="@+id/actionButtonWrapper"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
@@ -173,12 +344,15 @@
             android:id="@+id/btnDemarrer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="DÉMARRER LA COURSE"
+            android:text="▶ DÉMARRER LA COURSE"
             android:textColor="#FFFFFF"
-            android:backgroundTint="#009688"
+            android:textSize="16sp"
+            android:backgroundTint="#00897B"
             android:fontFamily="sans-serif-medium"
-            android:padding="16dp"
-            android:layout_marginBottom="8dp"/>
+            android:letterSpacing="0.05"
+            android:padding="18dp"
+            android:elevation="4dp"
+            android:layout_marginBottom="12dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -191,24 +365,30 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="STOP"
+                android:text="■ STOP"
                 android:textColor="#FFFFFF"
-                android:backgroundTint="#D32F2F"
+                android:textSize="14sp"
+                android:backgroundTint="#C62828"
                 android:fontFamily="sans-serif-medium"
-                android:padding="14dp"
-                android:layout_marginEnd="4dp"/>
+                android:letterSpacing="0.08"
+                android:padding="16dp"
+                android:elevation="4dp"
+                android:layout_marginEnd="6dp"/>
 
             <Button
                 android:id="@+id/btnRestart"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="RESTART"
+                android:text="↻ RESTART"
                 android:textColor="#FFFFFF"
-                android:backgroundTint="#1976D2"
+                android:textSize="14sp"
+                android:backgroundTint="#1565C0"
                 android:fontFamily="sans-serif-medium"
-                android:padding="14dp"
-                android:layout_marginStart="4dp"/>
+                android:letterSpacing="0.08"
+                android:padding="16dp"
+                android:elevation="4dp"
+                android:layout_marginStart="6dp"/>
         </LinearLayout>
     </LinearLayout>
 
