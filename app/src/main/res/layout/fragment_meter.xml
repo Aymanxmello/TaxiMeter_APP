@@ -1,221 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg">
+    android:background="#000000"
+    tools:context=".MeterFragment">
 
-    <!-- Conteneur principal centré -->
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@drawable/bg"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:padding="20dp"> <!-- Ajout de padding pour espacer les bords -->
+        android:id="@+id/mainDigitalDisplayLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="MissingConstraints">
 
-        <!-- Titre -->
-        <TextView
-            style="@style/titresClair"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="TAXIMETER"
-            android:layout_marginBottom="20dp" /> <!-- Marge pour espacer du logo -->
+            android:layout_weight="5"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:background="#111111"
+            android:padding="8dp"
+            android:layout_marginEnd="8dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TOTAL"
+                android:textColor="#FFC107"
+                android:textSize="18sp"
+                android:fontFamily="sans-serif-medium" />
+            <TextView
+                android:id="@+id/textViewTotalFare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.00"
+                android:textColor="#00FF00"
+                android:textSize="110sp"
+                android:fontFamily="@font/ds_digib"
+                android:letterSpacing="0.05"
+                tools:text="15.75" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DH"
+                android:textColor="#FFC107"
+                android:textSize="18sp"
+                android:fontFamily="sans-serif-medium"/>
+        </LinearLayout>
 
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:background="@drawable/gradient_background"
-            app:cardCornerRadius="40dp">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:orientation="vertical"
+            android:gravity="center">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:background="@drawable/lamp"
-                android:orientation="vertical">
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:background="#111111"
+                android:padding="4dp"
+                android:layout_marginBottom="4dp">
                 <TextView
-                    style="@style/titresClair2"
-                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/grisClair"
-                    android:text="TOTAL" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        style="@style/textStyleChrono"
-                        android:gravity="end"
-                        android:paddingEnd="50dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="888.88"
-                        android:textColor="@color/gris"
-                        android:textSize="100dp"/>
-                    <TextView
-                        android:id="@+id/tvTotalAPayer"
-                        style="@style/textStyleChrono"
-                        android:gravity="end"
-                        android:paddingEnd="50dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="2.50"
-                        android:textSize="100dp"/>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:text="DISTANCE (KM)"
+                    android:textColor="#AAAAAA"
+                    android:textSize="10sp"
+                    android:fontFamily="sans-serif-medium" />
                 <TextView
-                    style="@style/textStyle"
-                    android:layout_gravity="center"
+                    android:id="@+id/textViewDistance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dhs" />
-
-                <!-- Informations supplémentaires -->
-                <LinearLayout
-                    android:id="@+id/layout1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:layout_marginBottom="20dp">
-
-                    <!-- Bloc Temps -->
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingBottom="10dp"
-                        android:gravity="center"
-                        android:layout_weight="1">
-                        <TextView
-                            style="@style/textStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Temps"/> <!-- Espacement entre texte -->
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <TextView
-                                style="@style/textStyleChrono"
-                                android:gravity="end"
-                                android:paddingEnd="30dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="888:88"
-                                android:textColor="@color/gris"/>
-                            <TextView
-                                android:id="@+id/tvTempsEcoule"
-                                style="@style/textStyleChrono"
-                                android:gravity="end"
-                                android:paddingEnd="30dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="00:00"/>
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-                        <TextView
-                            style="@style/textStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="m" />
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingBottom="10dp"
-                        android:gravity="center"
-                        android:layout_weight="1">
-                        <TextView
-                            style="@style/textStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Distance"/>
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <TextView
-                                style="@style/textStyleChrono"
-                                android:gravity="end"
-                                android:paddingEnd="30dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="888.88"
-                                android:textColor="@color/gris"/>
-                            <TextView
-                                android:id="@+id/tvDistance"
-                                style="@style/textStyleChrono"
-                                android:gravity="end"
-                                android:paddingEnd="30dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="00.00"/>
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <TextView
-                            style="@style/textStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="km"/>
-                    </LinearLayout>
-                    <!-- Bloc Distance -->
-
-
-
-                </LinearLayout>
-                <Button
-                    android:id="@+id/btnDemarrerTaxi"
-                    style="@style/titresSombre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/jauneTaxi"
-                    android:text="DÉMARRER"
-                    app:layout_constraintTop_toBottomOf="@id/layout1"
-                    android:gravity="bottom"
-                    android:layout_marginTop="20dp" />
-
+                    android:text="0.0"
+                    android:textColor="#00FFFF"
+                    android:textSize="32sp"
+                    android:fontFamily="@font/ds_digib"
+                    tools:text="3.8" />
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:background="#111111"
+                android:padding="4dp"
+                android:layout_marginTop="4dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TEMPS (HR:MIN)"
+                    android:textColor="#AAAAAA"
+                    android:textSize="10sp"
+                    android:fontFamily="sans-serif-medium" />
+                <TextView
+                    android:id="@+id/textViewTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="00:00"
+                    android:textColor="#FFC107"
+                    android:textSize="32sp"
+                    android:fontFamily="@font/ds_digib"
+                    tools:text="05:30" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
 
+    ---
 
+    <LinearLayout
+        android:id="@+id/HD_TempLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mainDigitalDisplayLayout">
 
-        </androidx.cardview.widget.CardView>
-        <!-- Bouton de démarrage -->
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btnReset"
-                style="@style/titresClair2"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:background="#111111"
+            android:padding="8dp"
+            android:layout_marginEnd="4dp">
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/bleu"
-                android:text="RESET"
-                app:layout_constraintTop_toBottomOf="@id/layout1"
-                android:gravity="center"
-                android:layout_marginTop="20dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_weight="1"/>
-            <Button
-                android:id="@+id/btnStop"
-                style="@style/titresClair2"
+                android:text="H / D RATE"
+                android:textColor="#AAAAAA"
+                android:textSize="12sp"
+                android:fontFamily="sans-serif-medium" />
+            <TextView
+                android:id="@+id/textViewHD"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/rouge"
-                android:text="STOP"
-                app:layout_constraintTop_toBottomOf="@id/layout1"
-                android:gravity="center"
-                android:layout_marginTop="20dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_weight="1"/>
-
+                android:text="0.00"
+                android:textColor="#FF00FF"
+                android:textSize="36sp"
+                android:fontFamily="@font/ds_digib"
+                tools:text="1.25" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:background="#111111"
+            android:padding="8dp"
+            android:layout_marginStart="4dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TEMP (°C)"
+                android:textColor="#AAAAAA"
+                android:textSize="12sp"
+                android:fontFamily="sans-serif-medium" />
+            <TextView
+                android:id="@+id/textViewTemperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="--°"
+                android:textColor="#ADD8E6"
+                android:textSize="36sp"
+                android:fontFamily="@font/ds_digib"
+                tools:text="22°" />
+        </LinearLayout>
+    </LinearLayout>
 
+    ---
+
+    <LinearLayout
+        android:id="@+id/actionButtonLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/HD_TempLayout"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <Button
+            android:id="@+id/btnDemarrer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="DÉMARRER LA COURSE"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#009688"
+            android:fontFamily="sans-serif-medium"
+            android:padding="14dp"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/btnStop"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="STOP"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#D32F2F"
+            android:fontFamily="sans-serif-medium"
+            android:padding="14dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"/>
+
+        <Button
+            android:id="@+id/btnRestart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="RESTART"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#1976D2"
+            android:fontFamily="sans-serif-medium"
+            android:padding="14dp"
+            android:layout_marginStart="8dp"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
