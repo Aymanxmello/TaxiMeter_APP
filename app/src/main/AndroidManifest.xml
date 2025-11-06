@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.cmc.taximeter">
 
+    <!-- Permissions -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
@@ -19,19 +20,26 @@
         android:theme="@style/Theme.TaxiMeter"
         tools:targetApi="31">
 
+        <!-- Google Maps API Key -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDyNCW11CVrYSR3Jf8jS66lIoamV1f2Rfk" />
 
+        <!-- AIzaSyDXV9R9yL2jDoUC5ssMCIRogBWVds78J4I -->
+
+        <!-- Activities -->
+
+        <!-- Main Activity (Non-exported) -->
         <activity
             android:name=".MainActivity"
-            android:exported="false"
-            android:screenOrientation="landscape" />
+            android:exported="false" />
 
+        <!-- Authentication Activity -->
         <activity
             android:name=".AuthenticationActivity"
             android:exported="false" />
 
+        <!-- Splash Activity (Launcher) -->
         <activity
             android:name=".SplashActivity"
             android:exported="true">

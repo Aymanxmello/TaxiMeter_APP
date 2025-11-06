@@ -25,11 +25,16 @@ import androidx.core.app.NotificationCompat
 
 class MeterFragment : Fragment(R.layout.fragment_meter) {
 
-    private lateinit var tvDistance: TextView
-    private lateinit var tvTempsEcoule: TextView
-    private lateinit var tvTotalAPayer: TextView
-    private lateinit var btnDemarrerTaxi: Button
-    private lateinit var btnReset: Button
+    private lateinit var tvDistance: TextView // Now maps to R.id.textViewDistance
+    private lateinit var tvTempsEcoule: TextView // Now maps to R.id.textViewTime
+    private lateinit var tvTotalAPayer: TextView // Now maps to R.id.textViewTotalFare
+
+    // New TextViews from the digital design
+    private lateinit var tvTemperature: TextView
+    private lateinit var tvHdRate: TextView
+
+    private lateinit var btnDemarrerTaxi: Button // Now maps to R.id.btnDemarrer
+    private lateinit var btnReset: Button // Now maps to R.id.btnRestart
     private lateinit var btnStop: Button
 
     private lateinit var clientLocalisation: FusedLocationProviderClient
@@ -48,12 +53,18 @@ class MeterFragment : Fragment(R.layout.fragment_meter) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Initialisation des vues
-        tvDistance = view.findViewById(R.id.tvDistance)
-        tvTempsEcoule = view.findViewById(R.id.tvTempsEcoule)
-        tvTotalAPayer = view.findViewById(R.id.tvTotalAPayer)
-        btnDemarrerTaxi = view.findViewById(R.id.btnDemarrerTaxi)
-        btnReset = view.findViewById(R.id.btnReset)
+        // Initialisation des vues - UPDATED TO NEW IDS
+        tvDistance = view.findViewById(R.id.textViewDistance)
+        tvTempsEcoule = view.findViewById(R.id.textViewTime)
+        tvTotalAPayer = view.findViewById(R.id.textViewTotalFare)
+
+        // New TextViews initialization
+        tvTemperature = view.findViewById(R.id.textViewTemperature)
+        tvHdRate = view.findViewById(R.id.textViewHD)
+
+        // Button initialization - UPDATED TO NEW IDS
+        btnDemarrerTaxi = view.findViewById(R.id.btnDemarrer)
+        btnReset = view.findViewById(R.id.btnRestart)
         btnStop = view.findViewById(R.id.btnStop)
 
         // Initialisation du client de localisation
@@ -104,6 +115,9 @@ class MeterFragment : Fragment(R.layout.fragment_meter) {
                     tvDistance.text = "%.2f".format(distanceTotale / 1000)
                     tvTempsEcoule.text = tempsFormatte
                     tvTotalAPayer.text = "%.2f".format(calculerMontantTotal(distanceTotale))
+
+                    // NOTE: tvTemperature and tvHdRate still need data sources to update,
+                    // but they are now initialized and won't cause crashes.
 
                     delay(1000)  // Met à jour toutes les secondes
                 }
