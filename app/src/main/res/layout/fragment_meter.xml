@@ -324,71 +324,128 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Control Buttons -->
+    <!-- Control Buttons - Numeric Keypad Style -->
     <LinearLayout
         android:id="@+id/actionButtonWrapper"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
+        android:background="#1A1A1A"
+        android:padding="8dp"
         android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
+        android:elevation="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/TempLayout"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <Button
-            android:id="@+id/btnDemarrer"
+        <!-- Start Button - Large like meter activation -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="▶ DÉMARRER LA COURSE"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:backgroundTint="#00897B"
-            android:fontFamily="sans-serif-medium"
-            android:letterSpacing="0.05"
-            android:padding="18dp"
-            android:elevation="4dp"
-            android:layout_marginBottom="12dp"/>
+            android:orientation="vertical"
+            android:background="#000000"
+            android:padding="4dp"
+            android:layout_margin="4dp">
 
+            <Button
+                android:id="@+id/btnDemarrer"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:text="DÉMARRER"
+                android:textColor="#00FF00"
+                android:textSize="48sp"
+                android:backgroundTint="#1A3A1A"
+                android:fontFamily="@font/ds_digib"
+                android:elevation="2dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DÉMARRER"
+                android:textColor="#00FF00"
+                android:textSize="12sp"
+                android:textAlignment="center"
+                android:fontFamily="sans-serif-condensed"
+                android:letterSpacing="0.1"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"/>
+        </LinearLayout>
+
+        <!-- Stop and Restart Buttons - Numeric style -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center">
+            android:background="#000000"
+            android:padding="4dp"
+            android:layout_margin="4dp">
 
-            <Button
-                android:id="@+id/btnStop"
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="■ STOP"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp"
-                android:backgroundTint="#C62828"
-                android:fontFamily="sans-serif-medium"
-                android:letterSpacing="0.08"
-                android:padding="16dp"
-                android:elevation="4dp"
-                android:layout_marginEnd="6dp"/>
+                android:orientation="vertical"
+                android:layout_marginEnd="2dp">
 
-            <Button
-                android:id="@+id/btnRestart"
+                <Button
+                    android:id="@+id/btnStop"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:text="STOP"
+                    android:textColor="#FF0000"
+                    android:textSize="42sp"
+                    android:backgroundTint="#3A1A1A"
+                    android:fontFamily="@font/ds_digib"
+                    android:elevation="2dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="STOP"
+                    android:textColor="#FF0000"
+                    android:textSize="11sp"
+                    android:textAlignment="center"
+                    android:fontFamily="sans-serif-condensed"
+                    android:letterSpacing="0.1"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"/>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="↻ RESTART"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp"
-                android:backgroundTint="#1565C0"
-                android:fontFamily="sans-serif-medium"
-                android:letterSpacing="0.08"
-                android:padding="16dp"
-                android:elevation="4dp"
-                android:layout_marginStart="6dp"/>
+                android:orientation="vertical"
+                android:layout_marginStart="2dp">
+
+                <Button
+                    android:id="@+id/btnRestart"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:text="RESTART"
+                    android:textColor="#00BFFF"
+                    android:textSize="42sp"
+                    android:backgroundTint="#1A2A3A"
+                    android:fontFamily="@font/ds_digib"
+                    android:elevation="2dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="RESTART"
+                    android:textColor="#00BFFF"
+                    android:textSize="11sp"
+                    android:textAlignment="center"
+                    android:fontFamily="sans-serif-condensed"
+                    android:letterSpacing="0.1"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
