@@ -39,6 +39,8 @@ android {
     }
 }
 
+// ... (lines 1-28 unchanged)
+
 dependencies {
 
     implementation(libs.androidx.core.ktx)
@@ -51,8 +53,13 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    // Retrofit for networking (Weather API)
+    val retrofitVersion = "2.9.0"
+    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
 
     implementation ("com.google.zxing:core:3.4.1")
+    // ... (rest of dependencies)
     implementation ("com.journeyapps:zxing-android-embedded:4.3.0")
 
     implementation ("com.google.android.gms:play-services-location:18.0.0")

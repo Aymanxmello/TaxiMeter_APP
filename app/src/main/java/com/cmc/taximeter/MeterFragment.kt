@@ -1,7 +1,6 @@
 package com.cmc.taximeter
 
 import android.Manifest
-import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -22,19 +21,48 @@ import pub.devrel.easypermissions.EasyPermissions
 import pub.devrel.easypermissions.PermissionRequest
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
+import retrofit2.http.Query
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
+// --- New Retrofit Interface and Data Classes (PLACEHOLDERS: Implement these in separate files) ---
+
+// 1. Weather API Interface (Replace with your actual structure if using a different API)
+interface WeatherApi {
+    @GET("data/2.5/weather")
+    fun getWeather(
+        @Query("lat") lat: Double,
+        @Query("lon") lon: Double,
+        @Query("units") units: String = "metric", // Celsius
+        @Query("appid") apiKey: String
+    ): Call<WeatherResponse>
+}
+
+// 2. Weather Data Model (Simplified for temperature only)
+data class WeatherResponse(
+    val main: Main
+)
+data class Main(
+    val temp: Float
+)
+// ------------------------------------------------------------------------------------------------
 
 class MeterFragment : Fragment(R.layout.fragment_meter) {
 
-    private lateinit var tvDistance: TextView // Now maps to R.id.textViewDistance
-    private lateinit var tvTempsEcoule: TextView // Now maps to R.id.textViewTime
-    private lateinit var tvTotalAPayer: TextView // Now maps to R.id.textViewTotalFare
+    private lateinit var tvDistance: TextView // Maps to R.id.textViewDistance
+    private lateinit var tvTempsEcoule: TextView // Maps to R.id.textViewTime
+    private lateinit var tvTotalAPayer: TextView // Maps to R.id.textViewTotalFare
 
     // New TextViews from the digital design
-    private lateinit var tvTemperature: TextView
+    private lateinit var tvTemperature: TextView // Maps to R.id.textViewTemperature
     private lateinit var tvHdRate: TextView
 
-    private lateinit var btnDemarrerTaxi: Button // Now maps to R.id.btnDemarrer
-    private lateinit var btnReset: Button // Now maps to R.id.btnRestart
+    private lateinit var btnDemarrerTaxi: Button // Maps to R.id.btnDemarrer
+    private lateinit var btnReset: Button // Maps to R.id.btnRestart
     private lateinit var btnStop: Button
 
     private lateinit var clientLocalisation: FusedLocationProviderClient
@@ -45,6 +73,10 @@ class MeterFragment : Fragment(R.layout.fragment_meter) {
     private var courseEnCours: Boolean = false
     private var tarifDeBase: Float = 2.5f
     private var prixParKm: Float = 2.0f
+
+    // Constants for weather and permissions
+    private val WEATHER_API_KEY = "4cd29e7ea36ffeaef7cad09a75f90f6c" // <--- REPLACE THIS
+    private val BASE_URL = "https://api.openweathermap.org/"
 
     private val PERMISSION_LOCALISATION = 123
     private val CHANNEL_ID = "course_channel"
@@ -60,7 +92,6 @@ class MeterFragment : Fragment(R.layout.fragment_meter) {
 
         // New TextViews initialization
         tvTemperature = view.findViewById(R.id.textViewTemperature)
-        tvHdRate = view.findViewById(R.id.textViewHD)
 
         // Button initialization - UPDATED TO NEW IDS
         btnDemarrerTaxi = view.findViewById(R.id.btnDemarrer)
@@ -100,7 +131,7 @@ class MeterFragment : Fragment(R.layout.fragment_meter) {
         btnDemarrerTaxi.isEnabled = false
         btnDemarrerTaxi.isClickable = false
 
-        // Lancer la coroutine pour mettre à jour la distance et le temps en temps réel
+        // Lancer la coroutine pour mettre à jour la distance, le temps, et la température
         CoroutineScope(Dispatchers.Main).launch {
             while (courseEnCours) {
                 val localisation = obtenirLocalisation()
@@ -116,13 +147,50 @@ class MeterFragment : Fragment(R.layout.fragment_meter) {
                     tvTempsEcoule.text = tempsFormatte
                     tvTotalAPayer.text = "%.2f".format(calculerMontantTotal(distanceTotale))
 
-                    // NOTE: tvTemperature and tvHdRate still need data sources to update,
-                    // but they are now initialized and won't cause crashes.
+                    // Mettre à jour la température
+                    fetchWeather(localisation.latitude, localisation.longitude)
 
                     delay(1000)  // Met à jour toutes les secondes
                 }
             }
         }
+    }
+
+    private fun fetchWeather(lat: Double, lon: Double) {
+        if (WEATHER_API_KEY == "YOUR_OPENWEATHER_API_KEY") {
+            tvTemperature.text = "API Key Missing"
+            return
+        }
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val service = retrofit.create(WeatherApi::class.java)
+        val call = service.getWeather(lat, lon, "metric", WEATHER_API_KEY) // "metric" for Celsius
+
+        call.enqueue(object : Callback<WeatherResponse> {
+            override fun onResponse(call: Call<WeatherResponse>, response: Response<WeatherResponse>) {
+                if (response.isSuccessful) {
+                    val tempCelsius = response.body()?.main?.temp
+                    if (tempCelsius != null) {
+                        // Format the temperature to show as "22°"
+                        tvTemperature.text = "${tempCelsius.toInt()}°"
+                    } else {
+                        tvTemperature.text = "--°"
+                    }
+                } else {
+                    // Handle API error response
+                    tvTemperature.text = "Error ${response.code()}"
+                }
+            }
+
+            override fun onFailure(call: Call<WeatherResponse>, t: Throwable) {
+                // Handle network failure
+                tvTemperature.text = "No Weather"
+            }
+        })
     }
 
     private fun stopCourse() {
@@ -148,6 +216,8 @@ class MeterFragment : Fragment(R.layout.fragment_meter) {
         tvDistance.text = "0.00"
         tvTempsEcoule.text = "00:00"
         tvTotalAPayer.text = "0.00"
+        tvTemperature.text = "--°" // Reset temperature display
+        tvHdRate.text = "0.00" // Reset H/D display
         btnDemarrerTaxi.text = "DÉMARRER"
         // Réinitialiser tout et afficher un message
         Toast.makeText(requireContext(), "Course réinitialisée", Toast.LENGTH_SHORT).show()

@@ -7,6 +7,7 @@
     android:background="#000000"
     tools:context=".MeterFragment">
 
+
     <LinearLayout
         android:id="@+id/mainDigitalDisplayLayout"
         android:layout_width="0dp"
@@ -115,7 +116,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/HD_TempLayout"
+        android:id="@+id/TempLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -128,41 +129,12 @@
         app:layout_constraintTop_toBottomOf="@id/mainDigitalDisplayLayout">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center_horizontal"
             android:background="#111111"
-            android:padding="8dp"
-            android:layout_marginEnd="4dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="H / D RATE"
-                android:textColor="#AAAAAA"
-                android:textSize="12sp"
-                android:fontFamily="sans-serif-medium" />
-            <TextView
-                android:id="@+id/textViewHD"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0.00"
-                android:textColor="#FF00FF"
-                android:textSize="36sp"
-                android:fontFamily="@font/ds_digib"
-                tools:text="1.25" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            android:background="#111111"
-            android:padding="8dp"
-            android:layout_marginStart="4dp">
+            android:padding="8dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -194,7 +166,7 @@
         android:layout_marginBottom="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/HD_TempLayout"
+        app:layout_constraintTop_toBottomOf="@id/TempLayout"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <Button
