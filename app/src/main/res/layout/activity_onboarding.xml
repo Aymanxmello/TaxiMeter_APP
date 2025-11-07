@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="32dp"
+    android:gravity="center"
+    android:background="@drawable/gradient_background">
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/taxi"
+        android:layout_marginBottom="40dp"
+        android:contentDescription="Taxi App Illustration" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bienvenue sur TAXIMETER"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Votre compteur de taxi moderne et intelligent. Connectez-vous ou inscrivez-vous pour commencer votre course."
+        android:textSize="18sp"
+        android:gravity="center"
+        android:textColor="@color/grisClair"
+        android:layout_marginBottom="40dp" />
+
+    <Button
+        android:id="@+id/btnStart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Démarrer"
+        android:backgroundTint="@color/jauneTaxi"
+        android:textColor="@color/black"
+        android:paddingVertical="14dp"
+        android:textSize="18sp" />
+
+</LinearLayout>

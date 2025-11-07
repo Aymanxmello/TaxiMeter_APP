@@ -13,6 +13,8 @@ import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import com.google.android.material.textfield.TextInputLayout // New import for TextInputLayout
 
 class AuthenticationActivity : AppCompatActivity() {
 
@@ -27,6 +29,10 @@ class AuthenticationActivity : AppCompatActivity() {
     private lateinit var ibPassword: ImageButton
     private lateinit var txtSignUp: TextView
     private lateinit var txtSignIn: TextView
+
+    // Nouveaux éléments pour le layout moderne
+    private lateinit var tilName: TextInputLayout // Correctly initialized in onCreate
+    private lateinit var tilAge: TextInputLayout // Correctly initialized in onCreate
 
     var isPassword = true
 
@@ -46,6 +52,11 @@ class AuthenticationActivity : AppCompatActivity() {
         txtSignUp = findViewById(R.id.txtSignUp)
         txtSignIn = findViewById(R.id.txtSignIn)
         ibPassword = findViewById(R.id.ibPassword)
+
+        // Initialisation des TextInputLayouts (nouvelles vues pour l'inscription)
+        // These MUST be initialized for the new modern XML
+        tilName = findViewById(R.id.tilName)
+        tilAge = findViewById(R.id.tilAge)
 
 
         ibPassword.setOnClickListener {
@@ -83,50 +94,58 @@ class AuthenticationActivity : AppCompatActivity() {
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerLicenseType.adapter = adapter
-    }
+    } // End of onCreate
 
     private fun togglePasswordVisibility() {
 
         if (isPassword) {
             // Afficher le texte normal
             edtPassword.inputType = InputType.TYPE_CLASS_TEXT
-            // Modifier l'icône du bouton si nécessaire (par exemple changer l'icône de l'œil)
             ibPassword.setImageResource(R.drawable.visibility)
         } else {
             // Afficher comme mot de passe
             edtPassword.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-            // Modifier l'icône du bouton pour l'œil ouvert
             ibPassword.setImageResource(R.drawable.visibility_off)
         }
 
-        // Mettre à jour l'état pour l'alterner lors du prochain clic
         isPassword = !isPassword
-
-        // Pour que le changement prenne effet immédiatement, demander à l'EditText de redonner le focus
         edtPassword.setSelection(edtPassword.text.length)
 
     }
 
-    // Fonction pour basculer vers l'écran d'inscription
+    // Fonction pour basculer vers l'écran d'inscription (Mise à jour pour le design moderne)
     private fun switchToSignUp() {
-        edtName.visibility = View.VISIBLE
-        edtAge.visibility = View.VISIBLE
+        // Logique pour le contrôle segmenté (Sign Up active)
+        txtSignUp.setBackgroundResource(R.drawable.cercle) // Background for active tab
+        txtSignUp.setTextColor(ContextCompat.getColor(this, R.color.black))
+        txtSignIn.setBackgroundResource(0) // Transparent background for inactive tab
+        txtSignIn.setTextColor(ContextCompat.getColor(this, R.color.grisSombre))
+
+        // Afficher les champs d'inscription
+        tilName.visibility = View.VISIBLE
+        tilAge.visibility = View.VISIBLE
         spinnerLicenseType.visibility = View.VISIBLE
+
+        // Afficher le bouton d'inscription
         btnSignUp.visibility = View.VISIBLE
         btnSignIn.visibility = View.GONE
-        txtSignUp.visibility = View.GONE
-        txtSignIn.visibility = View.VISIBLE
     }
 
-    // Fonction pour basculer vers l'écran de connexion
     private fun switchToSignIn() {
-        edtName.visibility = View.GONE
-        edtAge.visibility = View.GONE
+        // Logique pour le contrôle segmenté (Sign In active)
+        txtSignIn.setBackgroundResource(R.drawable.cercle) // Background for active tab
+        txtSignIn.setTextColor(ContextCompat.getColor(this, R.color.black))
+        txtSignUp.setBackgroundResource(0) // Transparent background for inactive tab
+        txtSignUp.setTextColor(ContextCompat.getColor(this, R.color.grisSombre))
+
+        // Cacher les champs d'inscription
+        tilName.visibility = View.GONE
+        tilAge.visibility = View.GONE
         spinnerLicenseType.visibility = View.GONE
+
+        // Afficher le bouton de connexion
         btnSignUp.visibility = View.GONE
         btnSignIn.visibility = View.VISIBLE
-        txtSignUp.visibility = View.VISIBLE
-        txtSignIn.visibility = View.GONE
     }
 
     // Fonction de connexion
@@ -141,15 +160,13 @@ class AuthenticationActivity : AppCompatActivity() {
             return
         }
 
-        // Vérifier les informations de connexion dans SharedPreferences
         val sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE)
         val storedPassword = sharedPreferences.getString(email, null)
 
         if (storedPassword != null && storedPassword == password) {
             // Connexion réussie
-            // Enregistrer l'email de l'utilisateur dans SharedPreferences comme utilisateur connecté
             val editor = sharedPreferences.edit()
-            editor.putString("loggedInUser", email)  // Clé pour stocker l'email de l'utilisateur
+            editor.putString("loggedInUser", email)
             editor.apply()
 
             // Démarrer MainActivity après la connexion réussie
@@ -165,7 +182,6 @@ class AuthenticationActivity : AppCompatActivity() {
 
     // Fonction d'inscription
     private fun signUp() {
-        // Récupérer les informations entrées par l'utilisateur
         val email = edtEmail.text.toString().lowercase()
         val password = edtPassword.text.toString()
         val name = edtName.text.toString()
@@ -178,7 +194,6 @@ class AuthenticationActivity : AppCompatActivity() {
             return
         }
 
-        // Vérifier si l'email existe déjà dans SharedPreferences
         val sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE)
         val existingEmail = sharedPreferences.getString(email, null)
 
@@ -188,7 +203,6 @@ class AuthenticationActivity : AppCompatActivity() {
             return
         }
 
-        // Enregistrer l'utilisateur dans SharedPreferences
         val editor = sharedPreferences.edit()
         editor.putString(email, password)
         editor.putString(email + "_name", name)
